@@ -41,3 +41,26 @@ void printInventory(Item* inv, int count) {
                   << "] ур." << inv[i].level << "\n";
     }
 }
+
+Item* removeItem(Item* inv, int& count, const char* name) {
+    for (int i = 0; i < count; i++) {
+        if (strcmp(inv[i].name, name) == 0) {
+            Item* newInv = new Item[count - 1];
+            
+            for (int j = 0; j < i; j++) {
+                newInv[j] = inv[j];
+            }
+            for (int j = i + 1; j < count; j++) {
+                newInv[j - 1] = inv[j];
+            }
+            
+            delete[] inv[i].name;
+            delete[] inv[i].type;
+            delete[] inv;
+            
+            count--;
+            return newInv;
+        }
+    }
+    return inv;
+}
