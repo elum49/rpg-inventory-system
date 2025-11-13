@@ -33,3 +33,11 @@ Item* addItem(Item* inv, int& count, const char* name, const char* type, int lev
     count++;
     return newInv;
 }
+
+void printInventory(Item* inv, int count) {
+    std::cout << "Инвентарь (" << count << "):\n";
+    for (int i = 0; i < count; i++) {
+        std::cout << "- " << inv[i].name << " [" << inv[i].type 
+                  << "] ур." << inv[i].level << "\n";
+    }
+}
