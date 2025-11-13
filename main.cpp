@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+using namespace std;
 
 struct Item {
     char* name;
@@ -14,7 +15,7 @@ char* copyString(const char* source) {
 }
 
 int main() {
-    std::cout << "RPG Inventory System" << std::endl;
+    cout << "RPG Inventory System" << std::endl;
     return 0;
 }
 
@@ -35,9 +36,9 @@ Item* addItem(Item* inv, int& count, const char* name, const char* type, int lev
 }
 
 void printInventory(Item* inv, int count) {
-    std::cout << "Инвентарь (" << count << "):\n";
+    cout << "Инвентарь (" << count << "):\n";
     for (int i = 0; i < count; i++) {
-        std::cout << "- " << inv[i].name << " [" << inv[i].type 
+        cout << "- " << inv[i].name << " [" << inv[i].type 
                   << "] ур." << inv[i].level << "\n";
     }
 }
@@ -119,23 +120,23 @@ int main() {
     inventory = addItem(inventory, count, "Щит", "броня", 5);
     inventory = addItem(inventory, count, "Зелье", "зелье", 1);
     
-    std::cout << "Исходный инвентарь:\n";
+    cout << "Исходный инвентарь:\n";
     printInventory(inventory, count);
     
     sortByLevel(inventory, count);
-    std::cout << "\nПосле сортировки:\n";
+    cout << "\nПосле сортировки:\n";
     printInventory(inventory, count);
     
     int filteredCount;
     Item* weapons = filterByType(inventory, count, "оружие", filteredCount);
     if (weapons) {
-        std::cout << "\nОружие:\n";
+        cout << "\nОружие:\n";
         printInventory(weapons, filteredCount);
         freeInventory(weapons, filteredCount);
     }
     
     inventory = removeItem(inventory, count, "Щит");
-    std::cout << "\nПосле удаления:\n";
+    cout << "\nПосле удаления:\n";
     printInventory(inventory, count);
     
     freeInventory(inventory, count);
