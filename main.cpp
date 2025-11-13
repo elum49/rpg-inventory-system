@@ -110,3 +110,35 @@ void freeInventory(Item* inv, int count) {
     }
     delete[] inv;
 }
+
+int main() {
+    Item* inventory = nullptr;
+    int count = 0;
+    
+    inventory = addItem(inventory, count, "Меч", "оружие", 10);
+    inventory = addItem(inventory, count, "Щит", "броня", 5);
+    inventory = addItem(inventory, count, "Зелье", "зелье", 1);
+    
+    std::cout << "Исходный инвентарь:\n";
+    printInventory(inventory, count);
+    
+    sortByLevel(inventory, count);
+    std::cout << "\nПосле сортировки:\n";
+    printInventory(inventory, count);
+    
+    int filteredCount;
+    Item* weapons = filterByType(inventory, count, "оружие", filteredCount);
+    if (weapons) {
+        std::cout << "\nОружие:\n";
+        printInventory(weapons, filteredCount);
+        freeInventory(weapons, filteredCount);
+    }
+    
+    inventory = removeItem(inventory, count, "Щит");
+    std::cout << "\nПосле удаления:\n";
+    printInventory(inventory, count);
+    
+    freeInventory(inventory, count);
+    
+    return 0;
+}
