@@ -76,3 +76,37 @@ void sortByLevel(Item* inv, int count) {
         }
     }
 }
+
+Item* filterByType(Item* inv, int count, const char* type, int& resultCount) {
+    resultCount = 0;
+    
+    for (int i = 0; i < count; i++) {
+        if (strcmp(inv[i].type, type) == 0) {
+            resultCount++;
+        }
+    }
+    
+    if (resultCount == 0) return nullptr;
+    
+    Item* filtered = new Item[resultCount];
+    int index = 0;
+    
+    for (int i = 0; i < count; i++) {
+        if (strcmp(inv[i].type, type) == 0) {
+            filtered[index].name = copyString(inv[i].name);
+            filtered[index].type = copyString(inv[i].type);
+            filtered[index].level = inv[i].level;
+            index++;
+        }
+    }
+    
+    return filtered;
+}
+
+void freeInventory(Item* inv, int count) {
+    for (int i = 0; i < count; i++) {
+        delete[] inv[i].name;
+        delete[] inv[i].type;
+    }
+    delete[] inv;
+}
