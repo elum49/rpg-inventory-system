@@ -64,3 +64,15 @@ Item* removeItem(Item* inv, int& count, const char* name) {
     }
     return inv;
 }
+
+void sortByLevel(Item* inv, int count) {
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (inv[j].level > inv[j + 1].level) {
+                Item temp = inv[j];
+                inv[j] = inv[j + 1];
+                inv[j + 1] = temp;
+            }
+        }
+    }
+}
